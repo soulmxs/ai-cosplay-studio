@@ -1,0 +1,9 @@
+name: Keep Repository Alive
+on:
+  schedule:
+    - cron: '0 12 * * *'
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Keeping repo active"
