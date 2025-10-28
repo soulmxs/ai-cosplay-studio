@@ -32,8 +32,20 @@
         <button disabled>Generate (скоро)</button>
       </div>
     </div>
-    <script>
-      // Свяжем с backend API на следующих шагах
-    </script>
+<script>
+(async () => {
+  const el = document.createElement('p');
+  el.textContent = 'Engine status: checking...';
+  document.querySelector('.wrap').prepend(el);
+  try {
+    // по dev-инструкции бек слушает http://127.0.0.1:8000
+    const r = await fetch('http://127.0.0.1:8000/health');
+    const j = await r.json();
+    el.textContent = 'Engine status: ' + (j.status || 'unknown');
+  } catch (e) {
+    el.textContent = 'Engine status: offline (start FastAPI: uvicorn main:app --reload)';
+  }
+})();
+</script>
   </body>
 </html>
