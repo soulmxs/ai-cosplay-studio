@@ -13,3 +13,8 @@ uvicorn main:app --reload
 cd apps/desktop
 npm install
 npm start
+
+### Upload and Preview (mock)
+POST /upload — загружает изображение в папку uploads  
+GET /preview/{job_id} — возвращает тестовый URL превью
+
