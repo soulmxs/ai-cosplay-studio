@@ -4,6 +4,10 @@ import uuid
 
 app = FastAPI(title="AI Cosplay Studio Engine")
 
+@app.get("/")
+def root():
+    return {"status": "ok", "engine": "AI Cosplay Studio"}
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
