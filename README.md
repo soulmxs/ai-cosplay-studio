@@ -18,3 +18,9 @@ npm start
 POST /upload — загружает изображение в папку uploads  
 GET /preview/{job_id} — возвращает тестовый URL превью
 
+## Job flow (mock)
+
+1) POST /generate → { job_id, status:"queued" }
+2) Server runs background task (processing)
+3) GET /jobs/{job_id} → { status: "processing" | "done" }
+4) GET /results/{job_id} → { preview_data_url: "data:image/svg+xml;..." }
