@@ -1,15 +1,22 @@
-from pydantic import BaseModel, Field
-from typing import Literal, Optional
-
-Mode = Literal["img2img", "txt2img"]
+from pydantic import BaseModel
+from typing import Optional, Literal
 
 class GenerateRequest(BaseModel):
-    mode: Mode = Field(default="img2img", description="img2img or txt2img")
-    prompt: str = Field(default="cosplay style", description="text style prompt")
-    strength: float = Field(default=0.5, ge=0.0, le=1.0)
+    image_base64: Optional[str] = None
+    prompt: Optional[str] = None
     seed: Optional[int] = None
+    mode: Optional[Literal["img2img", "txt2img"]] = "img2img"
 
 class GenerateResponse(BaseModel):
     ok: bool
     job_id: str
-    eta_sec: int = 1
+    eta_sec: Optional[int] = None
+    status: Optional[str] = "queued"
+
+class JobStatusResponse(BaseModel):
+    job_id: str
+    status: str
+
+class JobResultResponse(BaseModel):
+    job_id: str
+    preview_data_url: str
