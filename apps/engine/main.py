@@ -56,3 +56,15 @@ def job_result(job_id: str):
         # ещё не готово или нет такого job
         return JobResultResponse(job_id=job_id, preview_data_url="")
     return JobResultResponse(job_id=job_id, preview_data_url=r["preview_data_url"])
+
+# ---------------------------------------------
+# План интеграции image_utils (этап 2 — позже)
+# ---------------------------------------------
+# 1. При получении image_base64 в GenerateRequest:
+#    - вызывать image_utils.save_base64_image()
+#    - создавать уменьшенное превью через make_preview()
+# 2. Сохранять путь и превью в set_result()
+# 3. Возвращать preview_data_url в /results/{job_id}
+#
+# Пока код не активен — ожидает интеграции Pillow и тестирования локально.
+
